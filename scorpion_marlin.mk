@@ -24,8 +24,8 @@
 # Inherit from AOSP products. Most specific first.
 $(call inherit-product, device/google/marlin/aosp_marlin.mk)
 
-# Inherit DU product configuration
-$(call inherit-product, vendor/du/config/common_full_phone.mk)
+# Inherit product configuration
+$(call inherit-product, vendor/scorpion/config/common_full_phone.mk)
 
 # Custom device configuration
 
@@ -47,7 +47,7 @@ PRODUCT_PACKAGES += \
     textclassifier.smartselection.bundle1
 
 ## Device identifier. This must come after all inclusions
-PRODUCT_NAME := du_marlin
+PRODUCT_NAME := scorpion_marlin
 PRODUCT_DEVICE := marlin
 PRODUCT_BRAND := Google
 PRODUCT_MODEL := Pixel XL
