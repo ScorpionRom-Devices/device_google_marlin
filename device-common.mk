@@ -621,6 +621,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/google/marlin/permissions/privapp-permissions-marlin.xml:system/etc/permissions/privapp-permissions-marlin.xml
 
+# Scorpion priv-app permissions
+PRODUCT_COPY_FILES += \
+    device/google/marlin/permissions/scorpion-permissions.xml:system/etc/permissions/scorpion-permissions.xml
+ 
 PRODUCT_PACKAGES += \
     vndk-sp
 
