@@ -1,4 +1,5 @@
-# Copyright (C) 2013-2018 The Dirty Unicorns Project
+
+# Copyright (C) 2018 The ScorpionROM Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,10 +23,10 @@
 #
 
 # Inherit from AOSP products. Most specific first.
-$(call inherit-product, device/google/marlin/aosp_marlin.mk)
+$(call inherit-product, device/google/marlin/aosp_sailfish.mk)
 
-# Inherit DU product configuration
-$(call inherit-product, vendor/du/config/common_full_phone.mk)
+# Inherit product configuration
+$(call inherit-product, vendor/scorpion/config/common_full_phone.mk)
 
 # Custom device configuration
 
@@ -47,7 +48,7 @@ PRODUCT_PACKAGES += \
     textclassifier.smartselection.bundle1
 
 ## Device identifier. This must come after all inclusions
-PRODUCT_NAME := du_marlin
+PRODUCT_NAME := scorpion_sailfish
 PRODUCT_DEVICE := marlin
 PRODUCT_BRAND := Google
 PRODUCT_MODEL := Pixel XL
@@ -56,7 +57,7 @@ PRODUCT_RESTRICT_VENDOR_FILES := false
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
     PRODUCT_NAME=marlin \
-    PRIVATE_BUILD_DESC="marlin-user 9 PQ1A.181205.002.A1 5129870 release-keys"
+    PRIVATE_BUILD_DESC="sailfish-user 9 PQ1A.181205.002.A1 5129870 release-keys"
 
-BUILD_FINGERPRINT="google/marlin/marlin:9/PQ1A.181205.002.A1/5129870:user/release-keys"
+BUILD_FINGERPRINT="google/sailfish/sailfish:9/PQ1A.181205.002.A1/5129870:user/release-keys"
 BUILD_THUMBPRINT="9/PQ1A.181205.002.A1/5129870:user/release-keys"
