@@ -51,12 +51,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_NAME := scorpion_sailfish
 PRODUCT_DEVICE := sailfish
 PRODUCT_BRAND := Google
-PRODUCT_MODEL := Pixel XL
+PRODUCT_MODEL := Pixel
 TARGET_MANUFACTURER := HTC
 PRODUCT_RESTRICT_VENDOR_FILES := false
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    PRODUCT_NAME=marlin \
+    PRODUCT_NAME=sailfish \
     PRIVATE_BUILD_DESC="sailfish-user 9 PQ2A.190205.003 5180536 release-keys"
 
 BUILD_FINGERPRINT="google/sailfish/sailfish:9/PQ2A.190205.003/5180536:user/release-keys"

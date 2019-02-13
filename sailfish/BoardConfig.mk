@@ -25,7 +25,11 @@ TARGET_2ND_CPU_VARIANT := kryo
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_KERNEL := false
 TARGET_NO_RECOVERY := true
+ifneq ($(findstring aosp_sailfish_svelte, $(TARGET_PRODUCT)),)
+TARGET_RECOVERY_FSTAB := device/google/marlin/fstab.aosp_svelte
+else
 TARGET_RECOVERY_FSTAB := device/google/marlin/fstab.common
+endif
 BOARD_USES_RECOVERY_AS_BOOT := true
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
 BOOTLOADER_GCC_VERSION := arm-eabi-4.8
@@ -45,6 +49,7 @@ BOARD_USES_GENERIC_AUDIO := true
 BOARD_USES_ALSA_AUDIO := true
 AUDIO_FEATURE_ENABLED_MULTI_VOICE_SESSIONS := true
 AUDIO_FEATURE_ENABLED_SND_MONITOR := true
+
 TARGET_USES_QCOM_MM_AUDIO := true
 
 -include $(QCPATH)/common/msm8996/BoardConfigVendor.mk
@@ -79,6 +84,11 @@ TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 0x02000000
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2147483648
 BOARD_SYSTEMIMAGE_EXTFS_INODE_COUNT := 4096
+ifneq ($(findstring aosp_sailfish_svelte, $(TARGET_PRODUCT)),)
+BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := squashfs
+BOARD_SYSTEMIMAGE_JOURNAL_SIZE := 0
+BOARD_SYSTEMIMAGE_SQUASHFS_COMPRESSOR := lz4
+endif
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 10737418240
 BOARD_PERSISTIMAGE_PARTITION_SIZE := 33554432
 BOARD_PERSISTIMAGE_FILE_SYSTEM_TYPE := ext4
@@ -115,11 +125,16 @@ BOARD_KERNEL_TAGS_OFFSET := 0x02000000
 BOARD_RAMDISK_OFFSET     := 0x02200000
 endif
 
+# Kernel
+TARGET_KERNEL_CLANG_COMPILE := true
+TARGET_KERNEL_CLANG_VERSION := 8.0.4
+BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
+TARGET_COMPILE_WITH_MSM_KERNEL := true
+TARGET_KERNEL_CONFIG := du_marlin_defconfig
+TARGET_KERNEL_SOURCE := kernel/google/marlin
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADER_ARCH := arm64
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
-TARGET_USES_UNCOMPRESSED_KERNEL := false
-
 MAX_EGL_CACHE_KEY_SIZE := 12*1024
 MAX_EGL_CACHE_SIZE := 2048*1024
 
@@ -154,9 +169,6 @@ CAMERA_DAEMON_NOT_PRESENT := true
 
 #TARGET_LDPRELOAD := libNimsWrap.so
 
-# TARGET_COMPILE_WITH_MSM_KERNEL := true
-
-TARGET_KERNEL_APPEND_DTB := true
 # Added to indicate that protobuf-c is supported in this build
 PROTOBUF_SUPPORTED := false
 
@@ -175,7 +187,7 @@ TARGET_BOARD_KERNEL_HEADERS := device/google/marlin/kernel-headers
 # Install odex files into the other system image
 BOARD_USES_SYSTEM_OTHER_ODEX := true
 
--include vendor/google_devices/marlin/BoardConfigVendor.mk
+-include vendor/google/marlin/BoardConfigVendor.mk
 # Build a separate vendor.img
 TARGET_COPY_OUT_VENDOR := vendor
 
@@ -189,6 +201,10 @@ BOARD_PERFSETUP_SCRIPT := platform_testing/scripts/perf-setup/sailin-setup.sh
 TARGET_USES_MKE2FS := true
 
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
+
+ifneq ($(findstring sailfish_svelte, $(TARGET_PRODUCT)),)
+MALLOC_SVELTE := true
+endif
 
 DEVICE_MANIFEST_FILE := device/google/marlin/manifest.xml
 DEVICE_MATRIX_FILE   := device/google/marlin/compatibility_matrix.xml
