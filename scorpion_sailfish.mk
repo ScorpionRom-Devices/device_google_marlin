@@ -49,7 +49,7 @@ PRODUCT_PACKAGES += \
 
 ## Device identifier. This must come after all inclusions
 PRODUCT_NAME := scorpion_sailfish
-PRODUCT_DEVICE := marlin
+PRODUCT_DEVICE := sailfish
 PRODUCT_BRAND := Google
 PRODUCT_MODEL := Pixel XL
 TARGET_MANUFACTURER := HTC
