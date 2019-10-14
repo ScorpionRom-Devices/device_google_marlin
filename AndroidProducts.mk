@@ -1,7 +1,7 @@
 PRODUCT_MAKEFILES := \
 	$(LOCAL_DIR)/aosp_marlin.mk \
-	$(LOCAL_DIR)/du.mk
+	$(LOCAL_DIR)/scorpion.mk
 
 #COMMON_LUNCH_CHOICES := \
-#	du_marlin-user \
-#	du_marlin-userdebug
+#	scorpion_marlin-user \
+#	scorpion_marlin-userdebug
