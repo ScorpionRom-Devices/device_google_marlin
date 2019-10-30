@@ -98,7 +98,7 @@ BOARD_ROOT_EXTRA_FOLDERS := firmware firmware/radio persist
 BOARD_ROOT_EXTRA_SYMLINKS := /vendor/lib/dsp:/dsp
 
 BOARD_SEPOLICY_DIRS += device/google/marlin/sepolicy
-ifneq ($(filter sailfish sailfishf, $(TARGET_PRODUCT)),)
+ifneq ($(filter scorpion_sailfish sailfish sailfishf, $(TARGET_PRODUCT)),)
 BOARD_SEPOLICY_DIRS += device/google/marlin/sepolicy/verizon
 endif
 BOARD_PLAT_PUBLIC_SEPOLICY_DIR := device/google/marlin/sepolicy/public
@@ -120,11 +120,14 @@ BOARD_KERNEL_TAGS_OFFSET := 0x02000000
 BOARD_RAMDISK_OFFSET     := 0x02200000
 endif
 
+# Kernel
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADER_ARCH := arm64
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
-TARGET_USES_UNCOMPRESSED_KERNEL := false
-
+TARGET_KERNEL_CLANG_COMPILE := true
+BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
+TARGET_KERNEL_CONFIG := marlin_defconfig
+TARGET_KERNEL_SOURCE := kernel/google/marlin
 MAX_EGL_CACHE_KEY_SIZE := 12*1024
 MAX_EGL_CACHE_SIZE := 2048*1024
 
@@ -159,9 +162,6 @@ CAMERA_DAEMON_NOT_PRESENT := true
 
 #TARGET_LDPRELOAD := libNimsWrap.so
 
-# TARGET_COMPILE_WITH_MSM_KERNEL := true
-
-TARGET_KERNEL_APPEND_DTB := true
 # Added to indicate that protobuf-c is supported in this build
 PROTOBUF_SUPPORTED := false
 
@@ -181,9 +181,11 @@ TARGET_BOARD_KERNEL_HEADERS := device/google/marlin/kernel-headers
 # Install odex files into the other system image
 BOARD_USES_SYSTEM_OTHER_ODEX := true
 
--include vendor/google_devices/marlin/BoardConfigVendor.mk
 # Build a separate vendor.img
 TARGET_COPY_OUT_VENDOR := vendor
+
+# Build a separate product.img
+TARGET_COPY_OUT_PRODUCT := system/product
 
 #NFC
 NXP_CHIP_TYPE := 3
@@ -204,3 +206,6 @@ DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := device/google/marlin/device_framew
 EXCLUDE_SERIF_FONTS := true
 
 TARGET_FLATTEN_APEX := true
+
+BUILD_BROKEN_PHONY_TARGETS := true
+BUILD_BROKEN_DUP_RULES := true
